@@ -214,7 +214,7 @@ if __name__ == "__main__":
     pre_momae = [0.9]  # [0.98,0.9,0.95]
     pre_lrkl = [0.1]  # [0.007,0.01,0.0005,0.05,0.1,0.005,0.001]
     pre_alpha = [0.5] # alpha is the tau in the paper
-    pre_beta = [0] #1e-3 is recommended for contrastive loss on all datasets
+    pre_beta = [1e-3] #1e-3 is recommended for contrastive loss on all datasets
     pre_gamma = [1e-1]  # 
     best_AUC_me = 0
     best_AUC_mac = 0
