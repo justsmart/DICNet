@@ -198,7 +198,7 @@ if __name__ == "__main__":
     parser.add_argument('--LabelMaskRatio', type=float, default=0.5)
     parser.add_argument('--TraindataRatio', type=float, default=0.7)
     parser.add_argument('--AE_shuffle', type=bool, default=True)
-    parser.add_argument('--min_AP', default=0.33, type=float)
+    parser.add_argument('--min_AP', default=0., type=float)
     parser.add_argument('--tol', default=1e-7, type=float)
     args = parser.parse_args()
 
