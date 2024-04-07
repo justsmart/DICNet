@@ -4,7 +4,7 @@ Code for paper: "DICNet: Deep Instance-Level Contrastive Network for Double Inco
 
 You can run "python final-DICNET_bestresults.py" to train model in semi-supervised case (in the paper 100% data for training) and get the best results! 
 
-You can run 'sup_training/main.py' for the supvised case (70% data for training)! 
+You can run 'sup_training/main-sup.py' for the supvised case (70% data for training)! 
 
 
 If this code is useful to you, please cite it:
