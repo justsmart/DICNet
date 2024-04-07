@@ -232,10 +232,10 @@ if __name__ == '__main__':
     parser.add_argument('--lr', type=float, default=1e-1)
     parser.add_argument('--momentum', type=float, default=0.9)
     parser.add_argument('--weight_decay', type=float, default=1e-4)
-    parser.add_argument('--epochs', type=int, default=100)
+    parser.add_argument('--epochs', type=int, default=300)
     
     # Training args
-    parser.add_argument('--batch_size', type=int, default=89)
+    parser.add_argument('--batch_size', type=int, default=128)
     parser.add_argument('--alpha', type=float, default=1e-1)
     parser.add_argument('--beta', type=float, default=1e-1)
     parser.add_argument('--gamma', type=float, default=1e-1)
@@ -274,7 +274,7 @@ if __name__ == '__main__':
                             file_path = osp.join(args.records_dir,args.name+args.dataset+'_ViewMask_' + str(
                                             args.mask_view_ratio) + '_LabelMask_' +
                                             str(args.mask_label_ratio) + '_Training_' + 
-                                            str(args.training_sample_ratio) + '_bs89.txt')
+                                            str(args.training_sample_ratio) + '_bs128.txt')
                             args.file_path = file_path
                             existed_params = filterparam(file_path,[-3,-2,-1])
                             if [args.alpha,args.beta,args.gamma] in existed_params:
