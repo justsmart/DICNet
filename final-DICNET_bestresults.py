@@ -27,31 +27,8 @@ from loss import Loss
 from measure import *
 
 
-def wmse_loss(input, target, weight, reduction='mean'):
-    ret = (torch.diag(weight).mm(target - input)) ** 2
-    ret = torch.mean(ret)
-    return ret
 
 
-def do_metric(y_prob, label):
-    y_predict = y_prob > 0.5
-    ranking_loss = 1 - compute_ranking_loss(y_prob, label)
-    # print(ranking_loss)
-    one_error = compute_one_error(y_prob, label)
-    # print(one_error)
-    coverage = compute_coverage(y_prob, label)
-    # print(coverage)
-    hamming_loss = 1 - compute_hamming_loss(y_predict, label)
-    # print(hamming_loss)
-    precision = compute_average_precision(y_prob, label)
-    # print(precision)
-    macro_f1 = compute_macro_f1(y_predict, label)
-    # print(macro_f1)
-    micro_f1 = compute_micro_f1(y_predict, label)
-    # print(micro_f1)
-    auc = compute_auc(y_prob, label)
-    auc_me = mlc_auc(y_prob, label)
-    return np.array([hamming_loss, one_error, coverage, ranking_loss, precision, auc, auc_me, macro_f1, micro_f1])
 
 
 def train_DIC(mul_X, mul_X_val, WE,WE_val,yv_label, device,args):
@@ -116,7 +93,7 @@ def train_DIC(mul_X, mul_X_val, WE,WE_val,yv_label, device,args):
                                             + fan_sub_target.mul(torch.log(1 - target_pre + 1e-10))).mul(sub_obrT)))
             loss_AE = 0
             for iv, x_bar in enumerate(x_bar_list):
-                loss_AE += wmse_loss(x_bar, mul_X_batch[iv], we[:, iv])
+                loss_AE += loss_model.wmse_loss(x_bar, mul_X_batch[iv], we[:, iv])
             fusion_loss = loss_CL + args.gamma * loss_AE  + loss_Cont * args.beta
             # print('all:',fusion_loss.item())
             total_loss += fusion_loss.item()

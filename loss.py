@@ -27,4 +27,19 @@ class Loss(nn.Module):
         # print(label)
         loss = self.criterion(similarity_mat, label)
         return loss/N
-
+    def wmse_loss(self, input, target, weight, reduction='mean'):
+        ret = (torch.diag(weight).mm(target - input)) ** 2
+        ret = torch.mean(ret)
+        return ret
+    def weighted_BCE_loss(self,target_pre,sub_target,inc_L_ind,reduction='mean'):
+        assert torch.sum(torch.isnan(torch.log(target_pre))).item() == 0
+        assert torch.sum(torch.isnan(torch.log(1 - target_pre + 1e-5))).item() == 0
+        res=torch.abs((sub_target.mul(torch.log(target_pre + 1e-5)) \
+                                                + (1-sub_target).mul(torch.log(1 - target_pre + 1e-5))).mul(inc_L_ind))
+        
+        if reduction=='mean':
+            return torch.sum(res)/torch.sum(inc_L_ind)
+        elif reduction=='sum':
+            return torch.sum(res)
+        elif reduction=='none':
+            return res

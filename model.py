@@ -133,3 +133,12 @@ class DICNet(nn.Module):
         x_bar_list, target_pre, fusion_z, individual_zs = self.ae(mul_X, we)
 
         return x_bar_list, target_pre, fusion_z, individual_zs
+    
+    
+def get_model(d_list,n_layers=4,classes_num=10,device=torch.device('cuda:0')):
+    
+
+    model = DICNet(n_stacks=n_layers,n_input=d_list,n_z=classes_num,Nlabel=classes_num).to(device)
+    model = model.to(device)
+    
+    return model

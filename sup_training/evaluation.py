@@ -9,6 +9,7 @@ import numpy as np
 from sklearn import metrics
 
 def do_metric(y_prob, label):
+
     y_predict = y_prob > 0.5
     ranking_loss = 1 - compute_ranking_loss(y_prob, label)
     # print(ranking_loss)
@@ -26,9 +27,8 @@ def do_metric(y_prob, label):
     # print(micro_f1)
     auc = compute_auc(y_prob, label)
     auc_me = mlc_auc(y_prob, label)
-    return np.array([hamming_loss, one_error, coverage, ranking_loss, precision, auc, auc_me, macro_f1, micro_f1])
-
-
+    return np.array([precision, hamming_loss, ranking_loss, auc_me, one_error, coverage, auc, macro_f1, micro_f1])
+    
 def init_supervise(supervise):
     if supervise == "ranking loss":
         ranking_loss = 1.0
@@ -417,3 +417,8 @@ def mlc_auc(rocZ,newY):
         area = area+(fpr[i+1]-fpr[i])*(tpr[i+1]+tpr[i])*0.5
     value_auc = area/(fpr[m-1]-fpr[0])
     return value_auc
+
+if __name__=='__main__':
+    a=np.array([[0.1,0.2,0.1,0.4,0.8,0.9],[0.1,0.2,0.1,0.4,0.8,0.9]])
+    b=np.array([[1.,0.,1.,0.,1.,1.],[0.,1.,0.,1.,0.,0.]])
+    print(do_metric(a,b))
