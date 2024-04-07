@@ -9,7 +9,7 @@ If this code is useful to you, please cite it:
 @inproceedings{liu2023dicnet,
   title={DICNet: Deep Instance-Level Contrastive Network for Double Incomplete Multi-View Multi-Label Classification},
   author={Liu, Chengliang and Wen, Jie and Luo, Xiaoling and Huang, Chao and Wu, Zhihao and Xu, Yong},
-  journal={Proceedings of the AAAI Conference on Artificial Intelligence},
+  booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
   volume={37},
   number={7},
   pages={8807--8815},
